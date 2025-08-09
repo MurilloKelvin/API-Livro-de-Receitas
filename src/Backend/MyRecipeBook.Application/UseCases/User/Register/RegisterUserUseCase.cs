@@ -8,7 +8,13 @@ public class RegisterUserUseCase
 {
     public ResponseRegisteredUsersJson Execute(RequestRegisterUserJson request)
     {
-        // validar request
+        Validate(request);
+        
+        var user = new Domain.Entities.User
+        {
+            Name = request.Name,
+            Email = request.Email
+        };
         
         // map request to entity]
         
