@@ -4,10 +4,11 @@ public class ErrorOnValidationException : MyRecipeBookException
 {
     
     //array de mensagens de erro com struct 
-    public IList<string> ErrorsMessages { get; set; }
+    public IList<string> ErrorMessages { get; set; }
 
-    public ErrorOnValidationException(IList<string> errors)
+    public ErrorOnValidationException(IList<string> errorMessages)
     {
-        ErrorsMessages = errors; // erro do array = a esse erro
+        ErrorMessages = errorMessages;
     }
+
 }

@@ -27,4 +27,7 @@
     <data name="EMAIL_EMPTY" xml:space="preserve">
         <value>aaa</value>
     </data>
+    <data name="UNKNOWN_ERROR" xml:space="preserve">
+        <value>a</value>
+    </data>
 </root>

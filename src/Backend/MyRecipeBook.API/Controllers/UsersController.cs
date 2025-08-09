@@ -13,14 +13,15 @@ public class UsersController : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(typeof(ResponseRegisteredUsersJson), (StatusCodes.Status201Created))]
-    
+
     // responsavel por registrar um usuário
     public IActionResult Register(RequestRegisterUserJson request)
     {
         var useCase = new RegisterUserUseCase();
 
         var result = useCase.Execute(request);
-        
+
         return Created(string.Empty, result);
     }
 }
+
