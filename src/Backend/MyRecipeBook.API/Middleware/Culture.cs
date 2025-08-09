@@ -10,6 +10,7 @@ public class Culture
         _next = next;
     }
 
+    // Middleware para definir a cultura com base no cabeçalho Accept-Language da requisição 
     public async Task Invoke(HttpContext context)
     {
         var requestedCulture = context.Request.Headers.AcceptLanguage.ToString();

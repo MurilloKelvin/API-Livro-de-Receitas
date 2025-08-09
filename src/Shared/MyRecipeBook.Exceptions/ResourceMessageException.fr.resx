@@ -20,4 +20,7 @@
     <data name="PASSWORD" xml:space="preserve">
         <value>aa</value>
     </data>
+    <data name="UNKNOWN_ERROR" xml:space="preserve">
+        <value>a</value>
+    </data>
 </root>

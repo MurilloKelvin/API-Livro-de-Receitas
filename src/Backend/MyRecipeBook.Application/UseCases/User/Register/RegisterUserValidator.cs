@@ -8,7 +8,7 @@ namespace MyRecipeBook.Application.UseCases.User.Register;
 
 public class RegisterUserValidator : AbstractValidator<RequestRegisterUserJson>
 {
-    // REGRAS DE VALIDAÇÃO DO USUARIO
+    // REGRAS DE VALIDAÇÃO DO USUARIO & exceção personalizada
     public RegisterUserValidator()
     {
         RuleFor(user => user.Name).NotEmpty().WithMessage(ResourceMessageException.NAME_EMPTY);
