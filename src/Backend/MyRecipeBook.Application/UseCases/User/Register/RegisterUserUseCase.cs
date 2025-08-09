@@ -1,6 +1,7 @@
 ﻿using MyRecipeBook.Communication.Requests;
 using MyRecipeBook.Communication.Responses;
 using MyRecipeBook.Exceptions.ExceptionsBase;
+using AutoMapper;
 
 namespace MyRecipeBook.Application.UseCases.User.Register;
 
@@ -10,13 +11,12 @@ public class RegisterUserUseCase
     {
         Validate(request);
         
-        var user = new Domain.Entities.User
+        var autoMapper = new MapperConfiguration(options =>
         {
-            Name = request.Name,
-            Email = request.Email
-        };
-        
-        // map request to entity]
+            options.AddProfile(new MyRecipeBook.Application.AutoMapper.AutoMapping());  // usar o caminho completo do automapping para nao dar conflito com o automapping do ASP.NET Core
+        }).CreateMapper();
+
+        var user = autoMapper.Map<Domain.Entities.User>(request);
         
         // criptografar senha
         
