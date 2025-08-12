@@ -15,10 +15,10 @@ public class UsersController : ControllerBase
     [ProducesResponseType(typeof(ResponseRegisteredUsersJson), (StatusCodes.Status201Created))]
 
     // responsavel por registrar um usuário
-    public IActionResult Register(RequestRegisterUserJson request)
+    public IActionResult Register(
+        [FromServices]IRegisterUserUseCase useCase,  // injeção de dependência do caso de uso
+        [FromBody]RequestRegisterUserJson request)
     {
-        var useCase = new RegisterUserUseCase();
-
         var result = useCase.Execute(request);
 
         return Created(string.Empty, result);
