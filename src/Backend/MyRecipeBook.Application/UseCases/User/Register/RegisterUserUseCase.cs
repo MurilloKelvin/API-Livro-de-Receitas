@@ -7,24 +7,31 @@ using MyRecipeBook.Domain.Repositories.User;
 
 namespace MyRecipeBook.Application.UseCases.User.Register;
 
-public class RegisterUserUseCase
+public class RegisterUserUseCase : IRegisterUserUseCase
 {
     private readonly IUserWriteOnlyRepository _writeOnlyRepository;
     private readonly IUserReadOnlyRepository _readOnlyRepository;
+    private readonly IMapper _mapper;
+    private readonly PasswordEncripter _passwordEncripter;
+    
+    public RegisterUserUseCase(
+        IUserWriteOnlyRepository writeOnlyRepository,
+        IUserReadOnlyRepository readOnlyRepository,
+        IMapper mapper,
+        PasswordEncripter passwordEncripter)
+    {
+        _writeOnlyRepository = writeOnlyRepository;
+        _readOnlyRepository = readOnlyRepository;
+        _passwordEncripter = passwordEncripter;
+        _mapper = mapper;
+    }
     public async Task<ResponseRegisteredUsersJson> Execute(RequestRegisterUserJson request)
     {
         Validate(request);
         
-        var criptografiaDeSenha = new PasswordEncripter();        
-
-        var autoMapper = new MapperConfiguration(options =>
-        {
-            options.AddProfile(new MyRecipeBook.Application.AutoMapper.AutoMapping());  // usar o caminho completo do automapping para nao dar conflito com o automapping do ASP.NET Core
-        }).CreateMapper();
-
-        var user = autoMapper.Map<Domain.Entities.User>(request);
+        var user = _mapper.Map<Domain.Entities.User>(request);
         
-        user.Password = criptografiaDeSenha.Encrypt(request.Password); // encripta a senha antes de salvar no banco de dados
+        user.Password = _passwordEncripter.Encrypt(request.Password); // encripta a senha antes de salvar no banco de dados
         
         await _writeOnlyRepository.Add(user);
                 

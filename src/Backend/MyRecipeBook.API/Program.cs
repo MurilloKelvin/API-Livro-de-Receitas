@@ -2,6 +2,7 @@ using Microsoft.OpenApi.Models;
 using MyRecipeBook.API.Filters;
 using MyRecipeBook.API.Middleware;
 using MyRecipeBook.Application;
+using MyRecipeBook.Application.UseCases.User.Register;
 using MyRecipeBook.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
+
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
