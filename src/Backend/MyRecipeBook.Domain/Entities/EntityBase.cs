@@ -1,8 +1,11 @@
-﻿namespace MyRecipeBook.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MyRecipeBook.Domain.Entities;
 
 public class EntityBase
 {
-    public long Id { get; set; }
-    public bool IsActive { get; set; } = true;
+    [Key]
+    public long idusers { get; set; }
+    public bool Active { get; set; } = true;
     public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 }

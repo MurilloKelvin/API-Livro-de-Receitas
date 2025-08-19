@@ -28,6 +28,7 @@ public static class DependencyInjectionExtension
         //configura os repositórios de usuário com injeção de dependência
         // IUserWriteOnlyRepository é usado para adicionar usuários ao banco de dados
         // IUserReadOnlyRepository é usado para verificar se um usuário ativo com o email existe no db
+        services.AddScoped<IUnityOfWork, UnityOfWork>();
         services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
         services.AddScoped<IUserReadOnlyRepository, UserRepository>();
     }

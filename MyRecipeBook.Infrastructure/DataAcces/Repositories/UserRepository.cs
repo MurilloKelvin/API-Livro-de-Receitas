@@ -14,5 +14,5 @@ public class UserRepository : IUserWriteOnlyRepository, IUserReadOnlyRepository
     // adiciona um usuário ao banco de dados assíncronamente
     public async Task Add(User user) => await _dbContext.Users.AddAsync(user);
 
-    public async Task<bool> ExistActiveUserWithEmail(string email) => await _dbContext.Users.AnyAsync(u => u.Email == email && u.IsActive);
+    public async Task<bool> ExistActiveUserWithEmail(string email) => await _dbContext.Users.AnyAsync(u => u.Email == email && u.Active);
 }
