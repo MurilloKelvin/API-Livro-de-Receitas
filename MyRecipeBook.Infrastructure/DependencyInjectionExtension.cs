@@ -15,8 +15,8 @@ public static class DependencyInjectionExtension
     }
     private static void AddDbContext(IServiceCollection services)
     {
-        var connectionString = "Server=localhost;Database=myrecipebook;Uid=root;Pwd:senha123;"; // string de conexão com o banco de dados MySQL
-        var serverVersion = new MySqlServerVersion(new Version(8, 0, 33)); // versão do MySQL Server
+        var connectionString = "Server=localhost;Database=myrecipebook;Uid=root;Pwd=senha123;"; // string de conexão com o banco de dados MySQL
+        var serverVersion = new MySqlServerVersion(new Version(8, 0, 43)); // versão do MySQL Server
         
         services.AddDbContext<MyRecipeBookDbContext>(dbContextOptions =>
         {
@@ -28,6 +28,7 @@ public static class DependencyInjectionExtension
         //configura os repositórios de usuário com injeção de dependência
         // IUserWriteOnlyRepository é usado para adicionar usuários ao banco de dados
         // IUserReadOnlyRepository é usado para verificar se um usuário ativo com o email existe no db
+        services.AddScoped<IUnityOfWork, UnityOfWork>();
         services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
         services.AddScoped<IUserReadOnlyRepository, UserRepository>();
     }
