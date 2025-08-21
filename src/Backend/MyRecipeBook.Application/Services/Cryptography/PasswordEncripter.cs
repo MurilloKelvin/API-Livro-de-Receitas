@@ -5,12 +5,16 @@ namespace MyRecipeBook.Application.Services.Cryptography;
 
 public class PasswordEncripter
 {
+    private readonly string _salt;
+
+    public PasswordEncripter(string salt) => _salt = salt; // construtor que recebe um salt para aumentar a segurança da senha
+ 
+
     // func para encriptar a senha usando SHA-512
     public string Encrypt(string password)
     {
-        var salt = "JQW!@";  // string aleatoria
-        
-        var newPass = $"{password}{salt}"; // adiciona um salt para aumentar a segurança da senha
+
+        var newPass = $"{password}{_salt}"; // adiciona um salt para aumentar a segurança da senha
         
         var bytes = Encoding.UTF8.GetBytes(newPass);
         var hashBytes = SHA512.HashData(bytes);
