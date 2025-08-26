@@ -7,7 +7,7 @@ namespace MyRecipeBook.Infrastructure.DataAcces.Repositories;
 public class UserRepository : IUserWriteOnlyRepository, IUserReadOnlyRepository
 {
     private readonly MyRecipeBookDbContext _dbContext;
-    private IUserReadOnlyRepository _userReadOnlyRepositoryImplementation;
+    private readonly IUserReadOnlyRepository _userReadOnlyRepositoryImplementation;
 
     public UserRepository(MyRecipeBookDbContext dbContext) => _dbContext = dbContext;
     

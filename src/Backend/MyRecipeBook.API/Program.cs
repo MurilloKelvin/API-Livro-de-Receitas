@@ -2,8 +2,9 @@ using Microsoft.OpenApi.Models;
 using MyRecipeBook.API.Filters;
 using MyRecipeBook.API.Middleware;
 using MyRecipeBook.Application;
-using MyRecipeBook.Application.UseCases.User.Register;
 using MyRecipeBook.Infrastructure;
+using MyRecipeBook.Infrastructure.Extensions;
+using MyRecipeBook.Infrastructure.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,4 +47,15 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+MigrateDatabase();
+
 app.Run();
+
+void MigrateDatabase()
+{
+    var databaseType = builder.Configuration.DatabaseType();
+
+    var connectionString = builder.Configuration.ConnectionString();
+
+    DatabaseMigration.Migrate(databaseType, connectionString);
+}
