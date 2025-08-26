@@ -32,6 +32,6 @@ public static class DependencyInjectionExtension
     {
         var secretKey = configuration.GetSection("Settings:SecretKey:Value").Value;
 
-        services.AddScoped(options => new PasswordEncripter(secretKey));
+        services.AddScoped(options => new PasswordEncripter(secretKey!));
     }
 }
